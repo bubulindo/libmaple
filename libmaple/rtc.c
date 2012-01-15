@@ -61,18 +61,18 @@ void rtc_init(rtc_clk_src src) {
 			
 		case RTCSEL_LSE:
 			rcc_start_lse();
-			RCC_BASE->BDCR = RCC_BDCR_RTCSEL_LSE;
+			RCC_BASE->BDCR |= RCC_BDCR_RTCSEL_LSE;
 			break;
 			
 		case RTCSEL_LSI:
 		case RTCSEL_DEFAULT:
 			rcc_start_lsi();
-			RCC_BASE->BDCR = RCC_BDCR_RTCSEL_LSI;
+			RCC_BASE->BDCR |= RCC_BDCR_RTCSEL_LSI;
 			break;
 			
 		case RTCSEL_HSE:			// This selection uses HSE/128 as the RTC source (i.e. 64 kHz with an 8 mHz xtal)
 			rcc_start_hse();
-			RCC_BASE->BDCR = RCC_BDCR_RTCSEL_HSE;
+			RCC_BASE->BDCR |= RCC_BDCR_RTCSEL_HSE;
 			break;
 	}
 	*bb_perip(&RCC_BASE->BDCR, RCC_BDCR_RTCEN_BIT) = 1; // Enable the RTC
